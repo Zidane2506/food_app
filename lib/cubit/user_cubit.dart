@@ -42,6 +42,12 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<void> signOut() async {
-    emit(UserInitial());
+    ApiReturnValue<bool> result = await UserServices.logOut();
+    
+    if (result.value != null) {
+      emit(UserInitial());
+    } else {
+      emit(UserLoadingFailed(result.message!));
+    }
   }
 }

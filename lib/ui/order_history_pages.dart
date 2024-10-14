@@ -82,7 +82,7 @@ class _OrderHistoryPagesState extends State<OrderHistoryPages> {
                               e.status == TransactionStatus.on_delivery ||
                                   e.status == TransactionStatus.pending)
                                   .toList()
-                                  : mockTransaction
+                                  : state.transactions
                                   .where((e) =>
                               e.status == TransactionStatus.canceled ||
                                   e.status == TransactionStatus.delivered)
@@ -92,9 +92,14 @@ class _OrderHistoryPagesState extends State<OrderHistoryPages> {
                                 children: transaction
                                     .map((e) => Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: OrderListItems(
-                                    transaction: e,
-                                    itemWidth: listItemWidth,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      await launch(e.paymentUrl!);
+                                    },
+                                    child: OrderListItems(
+                                      transaction: e,
+                                      itemWidth: listItemWidth,
+                                    ),
                                   ),
                                 ))
                                     .toList(),

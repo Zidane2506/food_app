@@ -11,18 +11,14 @@ class ProfilePages extends StatelessWidget {
       body: SafeArea(
           child: Column(
             children: [
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage('${user.picturePath!}')
-                  ),
-                ),
-              ),
-              SizedBox(height: 13,),
-              Text('${user.name}',style: blackFontStyle,),
-              Text('${user.email}',style: blackFontStyle3,),
+              Text('Profile Pages'),
+              ElevatedButton(
+                  onPressed: () {
+                    context.read<UserCubit>().signOut();
+                    Get.to(SignInPages());
+                  },
+                  child: Text('LogOut')
+              )
             ],
           )
       ),

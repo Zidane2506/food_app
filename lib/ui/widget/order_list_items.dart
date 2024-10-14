@@ -52,7 +52,7 @@ class OrderListItems extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('Waktu'),
+              Text(convertDateTimeDisplay(transaction.dateTime!)),
               (transaction.status == TransactionStatus.delivered)
                   ? Container(
                       decoration: BoxDecoration(
@@ -61,15 +61,20 @@ class OrderListItems extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12,vertical: 3),
+                            horizontal: 12, vertical: 3),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Delivered',
-                              style: blackFontStyle2.copyWith(color: Colors.green),
+                              style:
+                                  blackFontStyle2.copyWith(color: Colors.green),
                             ),
-                            Icon(MdiIcons.checkCircle, color: Colors.green, size: 15,)
+                            Icon(
+                              MdiIcons.checkCircle,
+                              color: Colors.green,
+                              size: 15,
+                            )
                           ],
                         ),
                       ))
@@ -91,36 +96,35 @@ class OrderListItems extends StatelessWidget {
                           ))
                       : (transaction.status == TransactionStatus.pending)
                           ? Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white70,
-                      border:
-                      Border.all(color: Colors.orangeAccent, width: 2),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 3),
-                    child: Text(
-                      'Pending',
-                      style: blackFontStyle2.copyWith(
-                          color: Colors.orangeAccent),
-                    ),
-                  ))
+                              decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                      color: Colors.orangeAccent, width: 2),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 3),
+                                child: Text(
+                                  'Pending',
+                                  style: blackFontStyle2.copyWith(
+                                      color: Colors.orangeAccent),
+                                ),
+                              ))
                           : Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white70,
-                      border:
-                      Border.all(color: Colors.blueAccent, width: 2),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 3),
-                    child: Text(
-                      'On Delivery',
-                      style: blackFontStyle2.copyWith(
-                          color: Colors.blueAccent),
-                    ),
-                  )),
-              Text('Status'),
+                              decoration: BoxDecoration(
+                                  color: Colors.white70,
+                                  border: Border.all(
+                                      color: Colors.blueAccent, width: 2),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 3),
+                                child: Text(
+                                  'On Delivery',
+                                  style: blackFontStyle2.copyWith(
+                                      color: Colors.blueAccent),
+                                ),
+                              )),
             ],
           ),
         )

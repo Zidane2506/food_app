@@ -10,9 +10,7 @@ class UserServices {
     String url = baseUrl + '/login';
 
     var response = await client.post(Uri.parse(url),
-        headers: {
-          'Content-type': 'application/json',
-        },
+        headers: ApiServices.headersPost(),
         body:
             jsonEncode(<String, String>{'email': email, 'password': password}));
     if (response.statusCode != 200) {
@@ -36,9 +34,7 @@ class UserServices {
     String url = baseUrl + '/register';
 
     var response = await http.post(Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: ApiServices.headersPost(),
         body: jsonEncode(<String, String>{
           'name': user.name!,
           'email': user.email!,
@@ -102,5 +98,24 @@ class UserServices {
       return ApiReturnValue(
           message: 'Upload pictures failed, Please try again later');
     }
+  }
+
+  static Future<ApiReturnValue<bool>> logOut({http.Client? client}) async {
+
+    client ??= http.Client();
+
+    String url = '$baseUrl/logOut';
+    print("URL Logout : $url");
+
+    var response = await client.post(Uri.parse(url),
+    headers: ApiServices.headersPost(token: User.token));
+
+    print("Response Logout : ${response.body}");
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: 'LogOut Failed');
+    }
+
+    return ApiReturnValue(value: true);
   }
 }
